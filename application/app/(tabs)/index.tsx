@@ -1,7 +1,9 @@
 import {
+  Alert,
   FlatList,
   Image,
   ImageBackground,
+  ImageSourcePropType,
   SafeAreaView,
   ScrollView,
   Text,
@@ -11,9 +13,16 @@ import {
 import { GlobalStye } from "../../styles/globa.style";
 import { Header } from "../../components/Header";
 import bgImg from "../../assets/images/darkb.jpg";
-import demoImg from "../../assets/images/abc.png";
 import Hrt from "../../assets/icons/heart.png";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { getAllProperties } from "../../redux/actions/propertyAction";
 const HomePage = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getAllProperties({ userId: "", search: "" }));
+  }, [dispatch]);
+  const { properties } = useAppSelector((state) => state.property);
   return (
     <SafeAreaView style={GlobalStye.container}>
       <ScrollView style={{ width: "100%", flex: 1 }}>
@@ -23,7 +32,7 @@ const HomePage = () => {
           }
         >
           <ImageBackground
-            source={bgImg}
+            source={bgImg as ImageSourcePropType}
             style={{ width: "100%", height: 500 }}
           >
             <Header />
@@ -163,11 +172,11 @@ const HomePage = () => {
             }}
           >
             <FlatList
-              data={[1, 2, 3, 4, 5, 6]}
+              data={properties}
               numColumns={2} // This ensures 2 items per row
-              keyExtractor={(item) => item.toString()}
+              keyExtractor={(item) => JSON.stringify(item)}
               columnWrapperStyle={{ justifyContent: "space-between" }}
-              renderItem={() => (
+              renderItem={({ item }) => (
                 <View
                   style={{
                     width: "49%",
@@ -182,7 +191,7 @@ const HomePage = () => {
                 >
                   <View style={{ width: "100%", height: "40%" }}>
                     <Image
-                      source={demoImg}
+                      source={{ uri: String(item?.images?.[0]) }}
                       style={{
                         height: "100%",
                         width: "100%",
@@ -213,7 +222,7 @@ const HomePage = () => {
                           color: "rgb(112 101 240)",
                         }}
                       >
-                        ₹45000
+                        ₹{item.price}
                       </Text>
                       <View
                         style={{
@@ -225,7 +234,7 @@ const HomePage = () => {
                           alignItems: "center",
                         }}
                       >
-                        <Image style={{ width: 18, height: 18 }} source={Hrt} />
+                        <Image style={{ width: 18, height: 18 }} source={Hrt as ImageSourcePropType} />
                       </View>
                     </View>
                     <View
@@ -242,8 +251,10 @@ const HomePage = () => {
                           fontSize: 20,
                           fontWeight: "500",
                         }}
+                        numberOfLines={1} // Adjust the number of lines you want to show
+                        ellipsizeMode="tail"
                       >
-                        Vythiri Resort
+                        {item.title}
                       </Text>
                     </View>
                     <View
@@ -261,7 +272,8 @@ const HomePage = () => {
                           fontWeight: "300",
                         }}
                       >
-                        Malappuram,Kerala,India
+                        {item.address?.city},{item.address?.state},
+                        {item.address?.country}
                       </Text>
                     </View>
                     <View>
