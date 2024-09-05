@@ -28,9 +28,9 @@ app.use("/api/chat", chatRouter);
 const server = createServer(app);
 
 serverInstance(server);
-
-server.listen(5000, () => {
-  console.log("Server running on port 4000");
+const PORT = 9000;
+server.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
 });
 
 export default app;
