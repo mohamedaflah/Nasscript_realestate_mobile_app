@@ -11,7 +11,7 @@ export const Header = () => {
         height: 110,
         width: "100%",
         borderStyle: "solid",
-        
+
         display: "flex",
         justifyContent: "space-between",
         flexDirection: "column",
@@ -26,23 +26,35 @@ export const Header = () => {
             justifyContent: "flex-end",
             alignItems: "center",
             flexDirection: "row",
-            backgroundColor: "rgba(0 0 0 / 0.1)",
+            backgroundColor: "rgba(0 0 0 / 0.7)",
             paddingHorizontal: 20,
             gap: 22,
           } as unknown as StyleProp<ViewStyle>
         }
       >
         <View
-          style={{ height: 21, display: "flex", flexDirection: "row", gap: 5,alignItems:"center" }}
+          style={{
+            height: 21,
+            display: "flex",
+            flexDirection: "row",
+            gap: 5,
+            alignItems: "center",
+          }}
         >
           <Image source={Call} style={{ height: 15, width: 15 }} />
-          <Text>+974 946410015</Text>
+          <Text style={{ color: "white" }}>+974 946410015</Text>
         </View>
         <View
-          style={{ height: 21, display: "flex", flexDirection: "row", gap: 5,alignItems:"center" }}
+          style={{
+            height: 21,
+            display: "flex",
+            flexDirection: "row",
+            gap: 5,
+            alignItems: "center",
+          }}
         >
-          <Image source={Mail} style={{  height: 15, width: 15 }} />
-          <Text>abc@gmail.com</Text>
+          <Image source={Mail} style={{ height: 15, width: 15 }} />
+          <Text style={{ color: "white" }}>abc@gmail.com</Text>
         </View>
         <Image source={QtrFlag} style={{ height: 21, width: 35 }} />
         <Image source={UsFlag} style={{ height: 21, width: 35 }} />
@@ -55,7 +67,7 @@ export const Header = () => {
           justifyContent: "space-between",
           alignItems: "center",
           flexDirection: "row",
-          paddingHorizontal: 5,
+          paddingHorizontal: 16,
         }}
       >
         <Image source={Logo} style={{ width: 162, height: 52 }} />
