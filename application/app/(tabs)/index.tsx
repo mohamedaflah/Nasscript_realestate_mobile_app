@@ -2,7 +2,6 @@ import {
   FlatList,
   Image,
   ImageBackground,
-  Pressable,
   SafeAreaView,
   ScrollView,
   Text,
