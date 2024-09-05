@@ -2,10 +2,7 @@ import { Stack } from "expo-router";
 import AppWrapper from "./AppWrapper";
 
 const RootLayout = () => {
-  return (
-   <AppWrapper/>
-   
-  );
+  return <AppWrapper />;
 };
 
 export default RootLayout;

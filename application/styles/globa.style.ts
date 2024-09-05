@@ -4,5 +4,11 @@ export const GlobalStye = StyleSheet.create({
   container: {
     display: "flex",
     flex: 1,
+    paddingTop: 30,
+  },
+  wrapper: {
+    display: "flex",
+    flex: 1,
+    paddingHorizontal: 12,
   },
 });
