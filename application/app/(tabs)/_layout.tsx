@@ -47,7 +47,7 @@ const TabsLayout = () => {
         name="property/[id]"
         options={{
           title: "detail",
-          tabBarShowLabel: false,
+
           tabBarButton: () => null,
         }}
       />
