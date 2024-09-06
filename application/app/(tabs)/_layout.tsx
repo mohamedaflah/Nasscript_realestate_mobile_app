@@ -1,5 +1,9 @@
 import { Tabs } from "expo-router";
-import { HomeIcon, UserIcon } from "react-native-heroicons/outline"; // Import icons
+import {
+  HomeIcon,
+  UserIcon,
+  UserPlusIcon,
+} from "react-native-heroicons/outline"; // Import icons
 
 const TabsLayout = () => {
   return (
@@ -35,8 +39,16 @@ const TabsLayout = () => {
         options={{
           title: "Signup",
           tabBarIcon: ({ color, size }) => (
-            <UserIcon color={color} size={size} />
+            <UserPlusIcon color={color} size={size} />
           ),
+        }}
+      />
+      <Tabs.Screen
+        name="property/[id]"
+        options={{
+          title: "detail",
+          tabBarShowLabel: false,
+          tabBarButton: () => null,
         }}
       />
     </Tabs>

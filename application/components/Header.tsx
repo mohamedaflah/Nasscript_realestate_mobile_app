@@ -1,4 +1,4 @@
-import { Image, StyleProp, Text, View, ViewStyle } from "react-native";
+import { Image, ImageSourcePropType, StyleProp, Text, View, ViewStyle } from "react-native";
 import Logo from "../assets/images/jre-logo.png";
 import QtrFlag from "../assets/images/qtr.png";
 import UsFlag from "../assets/images/us.png";
@@ -41,10 +41,10 @@ export const Header = () => {
             alignItems: "center",
           }}
         >
-          <Image source={Call} style={{ height: 15, width: 15 }} />
+          <Image source={Call as ImageSourcePropType} style={{ height: 15, width: 15 }} />
           <Text style={{ color: "white" }}>+974 946410015</Text>
         </View>
-        <View
+        {/* <View
           style={{
             height: 21,
             display: "flex",
@@ -55,9 +55,9 @@ export const Header = () => {
         >
           <Image source={Mail} style={{ height: 15, width: 15 }} />
           <Text style={{ color: "white" }}>abc@gmail.com</Text>
-        </View>
-        <Image source={QtrFlag} style={{ height: 21, width: 35 }} />
-        <Image source={UsFlag} style={{ height: 21, width: 35 }} />
+        </View> */}
+        <Image source={QtrFlag as ImageSourcePropType} style={{ height: 21, width: 35 }} />
+        <Image source={UsFlag as ImageSourcePropType} style={{ height: 21, width: 35 }} />
       </View>
       <View
         style={{
@@ -70,7 +70,7 @@ export const Header = () => {
           paddingHorizontal: 16,
         }}
       >
-        <Image source={Logo} style={{ width: 162, height: 52 }} />
+        <Image source={Logo as ImageSourcePropType} style={{ width: 162, height: 52 }} />
       </View>
     </View>
   );
