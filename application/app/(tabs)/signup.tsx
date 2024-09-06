@@ -1,4 +1,4 @@
-import { Alert, Pressable, Text, TextInput, View } from "react-native";
+import { Alert, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import { GlobalStye } from "../../styles/globa.style";
 import { SafeAreaView } from "react-native-safe-area-context";
 import PhoneInput, { ICountry } from "react-native-international-phone-number";
@@ -66,17 +66,17 @@ const SignupPage = () => {
   };
   return (
     <SafeAreaView style={GlobalStye.container}>
-      <Toast position="top" />
+
       <View
         style={{
           width: "88%",
-          minHeight: 520,
+          minHeight: 490,
           borderWidth: 1,
           marginHorizontal: "auto",
           marginVertical: "auto",
           borderRadius: 10,
           borderColor: "#cfd1d0",
-          paddingVertical: 29,
+          paddingVertical: 12,
           paddingHorizontal: 10,
         }}
       >
@@ -88,9 +88,9 @@ const SignupPage = () => {
         <View
           style={{
             width: "100%",
-            marginTop: 24,
+            marginTop: 18,
             paddingHorizontal: 15,
-            gap: 18,
+            gap: 8,
           }}
         >
           <View style={{ width: "100%" }}>
@@ -105,7 +105,7 @@ const SignupPage = () => {
                 width: "100%",
                 height: 45,
                 backgroundColor: "white",
-                marginTop: 8,
+                marginTop: 5,
                 borderWidth: 1,
                 borderColor: "gray",
                 borderRadius: 8,
@@ -119,7 +119,7 @@ const SignupPage = () => {
           </View>
           <View style={{ width: "100%" }}>
             <Text>Mobile number</Text>
-            <View style={{ height: 45, marginTop: 8 }}>
+            <View style={{ height: 45, marginTop: 5 }}>
               <PhoneInput
                 value={inputValue as string}
                 onChangePhoneNumber={(number: string) => {
@@ -195,7 +195,7 @@ const SignupPage = () => {
           </View>
           <Pressable
             style={{
-              height: 45,
+              height: 45,marginTop:-4,
               width: "100%",
               borderRadius: 8,
               backgroundColor: "rgb(112 101 240)",
@@ -230,6 +230,7 @@ const SignupPage = () => {
           </View>
         </View>
       </View>
+      <Toast position="top" />
     </SafeAreaView>
   );
 };
