@@ -5,12 +5,13 @@ export const validateUserDetails = async (req: Request, res: Response) => {
   try {
     const { email, phoneNumber } = req.body;
 
-    
-    const emailExist = await userModel.findOne({ email: email });
-    if (emailExist) {
-      return res
-        .status(400)
-        .json({ status: false, message: "Email already taken" });
+    if (email) {
+      const emailExist = await userModel.findOne({ email: email });
+      if (emailExist) {
+        return res
+          .status(400)
+          .json({ status: false, message: "Email already taken" });
+      }
     }
     const phoneNumberExist = await userModel.findOne({
       phoneNumber: phoneNumber,

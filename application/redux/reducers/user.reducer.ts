@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import Toast from "react-native-toast-message";
 import { IUser, IUserInitial } from "../../types/user.types";
 import {
   getAlluserAction,
@@ -13,7 +13,7 @@ import {
 const initialState: IUserInitial = {
   loading: false,
   err: false,
-  verificationCheck: null,
+  verificationCheck: false,
   isVerified: false,
   user: null,
   users: null,
@@ -27,6 +27,10 @@ const userReducer = createSlice({
     },
     setUserLocally: (state, { payload }) => {
       state.user = payload;
+      state.isVerified = false;
+    },
+    setUserEmpty: (state) => {
+      state.user = null;
     },
   },
   name: "userReducer",
@@ -38,6 +42,11 @@ const userReducer = createSlice({
       .addCase(userSignup.fulfilled, (state, { payload }) => {
         state.loading = false;
         // toast.success("Signup success");
+        Toast.show({
+          type: "success",
+          text1: "Success",
+          text2: "Signup Successful",
+        });
         state.err = false;
         state.isVerified = true;
         state.user = payload.user;
@@ -46,6 +55,10 @@ const userReducer = createSlice({
         state.loading = false;
         state.err = String(payload);
         // toast.error(state.err);
+        Toast.show({
+          type: "error",
+          text2: state.err,
+        });
       })
       .addCase(userLogin.pending, (state) => {
         state.loading = true;
@@ -55,11 +68,21 @@ const userReducer = createSlice({
         state.user = payload.user;
         state.isVerified = true;
         // toast.success("Login success");
+        Toast.show({
+          type: "success",
+          text1: "Success",
+          text2: "Login Successful",
+        });
       })
       .addCase(userLogin.rejected, (state, { payload }) => {
         state.loading = false;
         state.err = String(payload);
         // toast.error(state.err);
+        Toast.show({
+          type: "error",
+          text2: state.err,
+          text1Style: { fontSize: 18 },
+        });
       })
       .addCase(getUser.pending, (state) => {
         state.loading = true;
@@ -81,12 +104,23 @@ const userReducer = createSlice({
         state.loading = false;
         state.user = null;
         state.isVerified = false;
-        // toast.success("Logout succesfull");
+
+        Toast.show({
+          type: "success",
+          text1: "Success",
+          text2: "Logout Successful",
+          text1Style: { fontSize: 18 },
+        });
       })
       .addCase(logoutUser.rejected, (state, { payload }) => {
         state.err = String(payload);
         state.loading = false;
         // toast.error(state.err);
+        Toast.show({
+          type: "error",
+          text2: state.err,
+          text1Style: { fontSize: 18 },
+        });
       })
       .addCase(validateUser.pending, (state) => {
         state.loading = true;
@@ -98,6 +132,11 @@ const userReducer = createSlice({
         state.loading = false;
         state.err = String(payload);
         // toast.error(state.err);
+        Toast.show({
+          type: "error",
+          text1: state.err,
+          text1Style: { fontSize: 18 },
+        });
       })
       .addCase(getAlluserAction.pending, (state) => {
         state.loading = true;
@@ -129,4 +168,5 @@ const userReducer = createSlice({
 });
 
 export default userReducer.reducer;
-export const { setConfirmationResult, setUserLocally } = userReducer.actions;
+export const { setConfirmationResult, setUserLocally, setUserEmpty } =
+  userReducer.actions;

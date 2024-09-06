@@ -1,14 +1,15 @@
-
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IUser } from "../../types/user.types";
 import { axiosInstance } from "../../constants/axiosInstance";
 import { handleErrors } from "../../utils/handleError";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 export const userSignup = createAsyncThunk(
   "user/signup",
   async (user: IUser, { rejectWithValue }) => {
     try {
       const { data } = await axiosInstance.post("/user/user", user);
+      console.log("🚀 ~ data:", data)
+      await AsyncStorage.setItem("token", data.token);
       return data;
     } catch (error) {
       return rejectWithValue(handleErrors(error));
@@ -24,6 +25,7 @@ export const userLogin = createAsyncThunk(
   ) => {
     try {
       const { data } = await axiosInstance.post("/user/login", user);
+      await AsyncStorage.setItem("token", data.token);
       return data;
     } catch (error) {
       return rejectWithValue(handleErrors(error));
@@ -35,7 +37,10 @@ export const getUser = createAsyncThunk(
   "user/getuser",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axiosInstance.get("/user/user");
+      const token = await AsyncStorage.getItem("token");
+      const { data } = await axiosInstance.get(
+        `/user/user?token=${token ? token : ""}`
+      );
       return data;
     } catch (error) {
       return rejectWithValue(handleErrors(error));
@@ -63,6 +68,7 @@ export const validateUser = createAsyncThunk(
   ) => {
     try {
       const { data } = await axiosInstance.post("/user/validate", sendPayload);
+
       return data;
     } catch (error) {
       return rejectWithValue(handleErrors(error));

@@ -26,7 +26,7 @@ export default function PropertyDetailPage() {
     <SafeAreaView style={GlobalStye.container}>
       {loading ? (
         <>
-        <Text>Loading</Text>
+        <Text>Loading...</Text>
         </>
       ) : (
         <>

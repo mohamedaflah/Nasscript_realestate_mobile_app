@@ -20,6 +20,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Card } from "../../components/Card";
 const HomePage = () => {
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.user);
   useEffect(() => {
     dispatch(getAllProperties({ userId: "", search: "" }));
   }, [dispatch]);

@@ -6,6 +6,7 @@ import { store } from "../redux/store";
 const RootLayout = () => {
   return (
     <Provider store={store}>
+    
       <AppWrapper />
     </Provider>
   );

@@ -7,8 +7,8 @@ export const getUserController = async (
   next: NextFunction
 ) => {
   try {
-    const token = req.cookies.token;
-    if (!token) {
+    const { token }: { token: string } = req.query as { token: string };
+    if (!token || token == "undefined" || token == "null") {
       return res
         .status(401)
         .json({ status: false, message: "token not found" });

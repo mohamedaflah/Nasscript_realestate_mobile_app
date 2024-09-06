@@ -1,17 +1,14 @@
 import { z } from "zod";
-import { parsePhoneNumberFromString } from "libphonenumber-js";
 
+// import PhoneNumber from "react-native-phone-number-input";
 // Define a regex for strong password validation
 const strongPasswordRegex = new RegExp(
   "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#\\$%\\^&\\*])(?=.{8,})"
 );
-const validatePhoneNumber = (value: string) => {
-  const phoneNumber = parsePhoneNumberFromString(value);
-  if (!phoneNumber) {
-    return false;
-  }
-  return phoneNumber.isValid();
-};
+// const validatePhoneNumber = (value: string) => {
+//   const phoneInput = new PhoneNumber();
+//   return phoneInput.isValidNumber(value);
+// };
 const isValidEmail = (value: string) => {
   // Simple regex for email validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -31,9 +28,10 @@ export const signupSchema = z.object({
       message: "Username cannot contain the '$' symbol",
     }),
 
-  phoneNumber: z.string().refine((value) => validatePhoneNumber(value), {
-    message: "Mobile number is invalid or does not match the country code",
-  }),
+  phoneNumber: z.string().nonempty(),
+  // refine((value) => validatePhoneNumber(value), {
+  //   message: "Mobile number is invalid or does not match the country code",
+  // })
 
   email: z
     .string()

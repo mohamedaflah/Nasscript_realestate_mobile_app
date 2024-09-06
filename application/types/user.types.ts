@@ -12,7 +12,7 @@ export interface IUser {
 }
 export interface IUserInitial {
   loading: boolean;
-  verificationCheck: ConfirmationResult | null;
+  verificationCheck: ConfirmationResult | boolean;
   isVerified: boolean;
   user: IUser | null;
   users:IUser[]|null

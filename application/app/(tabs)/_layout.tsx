@@ -3,9 +3,13 @@ import {
   HomeIcon,
   UserIcon,
   UserPlusIcon,
+  UserMinusIcon,
 } from "react-native-heroicons/outline"; // Import icons
+import { useAppSelector } from "../../redux/store";
+import { Pressable, Text } from "react-native";
 
 const TabsLayout = () => {
+  const { user, isVerified } = useAppSelector((state) => state.user);
   return (
     <Tabs
       screenOptions={{
@@ -32,6 +36,12 @@ const TabsLayout = () => {
           tabBarIcon: ({ color, size }) => (
             <UserIcon color={color} size={size} />
           ),
+          tabBarButton: (props) => {
+            if (!user || !user._id || !isVerified) {
+              return <Pressable {...props} />;
+            }
+            return null;
+          },
         }}
       />
       <Tabs.Screen
@@ -41,6 +51,12 @@ const TabsLayout = () => {
           tabBarIcon: ({ color, size }) => (
             <UserPlusIcon color={color} size={size} />
           ),
+          tabBarButton: (props) => {
+            if (!user || !user._id || !isVerified) {
+              return <Pressable {...props} />;
+            }
+            return null;
+          },
         }}
       />
       <Tabs.Screen
